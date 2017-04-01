@@ -30,6 +30,10 @@ namespace Web.App.Controllers
         // GET: DataManage
         public ActionResult Index()
         {
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);  // HTTP 1.1.
+            Response.Cache.AppendCacheExtension("no-store, must-revalidate");
+            Response.AppendHeader("Pragma", "no-cache"); // HTTP 1.0.
+            Response.AppendHeader("Expires", "0"); // Proxies.
             MessageAlert alert = TempData["messageAlert"] as MessageAlert;
             if (alert != null)
             {
