@@ -1,0 +1,34 @@
+﻿@model Web.Models.Tables.Subject
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2 class="panel-title">Subject Information</h2>
+    </div>
+    <div class="panel-body">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.SubjectName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SubjectName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Ajax.ActionLink("Edit", "Edit", "Subject", new { id = Model.SubjectId }, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-info" }) |
+            @Ajax.ActionLink("Back", "Index", "Subject", null, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-default" })
+        </p>
+
+    </div>
+</div>

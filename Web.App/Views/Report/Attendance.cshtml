@@ -1,0 +1,83 @@
+﻿
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2 class="panel-title">Search base in</h2>
+    </div>
+    <div class="panel-body">
+        <form>
+            <label class="radio-inline"><input type="radio" value="section" name="radio" id="radio-section" /> Section</label>
+            <label class="radio-inline"><input type="radio" value="student" name="radio" id="radio-student" /> Student</label>
+        </form>
+    </div>
+</div>
+<div id="search-option"></div>
+<div id="search-result"></div>
+<script>
+    $(document)
+        .ready(function () {
+            $("input:radio[name=radio]")
+                .click(function () {
+                    if ($("input:radio[name=radio]:checked").val() === "section") {
+                        $("#search-result")
+                            .hide("slow",
+                                function () {
+                                    $("#search-result").empty();
+                                });
+                        $.ajax({
+                            type: "GET",
+                            url: "/Report/SectionOption/",
+                            contentType: "application/json",
+                            dataType: "html",
+                            cache: false,
+                            success: function (data) {
+                                $("#search-option")
+                                    .hide("slow",
+                                        function () {
+                                            $("#search-option").html(data);
+                                            $("#search-option")
+                                                .show("slow",
+                                                    function () {
+
+                                                    });
+                                        });
+                            },
+                            error: function (xhr, textStatus, error) {
+                                alert(xhr.responseText);
+                                alert(textStatus);
+                                alert(error);
+                            }
+                        });
+                    } else if ($("input:radio[name=radio]:checked").val() === "student") {
+                        $("#search-result")
+                            .hide("slow",
+                                function () {
+                                    $("#search-result").empty();
+                                });
+                        $.ajax({
+                            type: "GET",
+                            url: "/Report/StudentOption/",
+                            contentType: "application/json",
+                            dataType: "html",
+                            cache: false,
+                            success: function (data) {
+                                $("#search-option")
+                                    .hide("slow",
+                                        function () {
+                                            $("#search-option").html(data);
+                                            $("#search-option")
+                                                .show("slow",
+                                                    function () {
+
+                                                    });
+                                        });
+                            },
+                            error: function (xhr, textStatus, error) {
+                                alert(xhr.responseText);
+                                alert(textStatus);
+                                alert(error);
+                            }
+                        });
+                    }
+                });
+        });
+</script>

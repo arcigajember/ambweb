@@ -1,0 +1,17 @@
+﻿@model Web.Models.Tables.Subject
+
+<tr>
+    <td>
+        @Html.CheckBoxFor(m => m.IsSelected, new { @class = "chkSelect" })
+
+    </td>
+    <td>
+        @Html.DisplayFor(m => m.SubjectName)
+        @Html.HiddenFor(m => m.SubjectName)
+        @Html.HiddenFor(m => m.SubjectId)
+    </td>
+    <td>
+        @Html.DisplayFor(m => m.Description)
+        @Html.HiddenFor(m => m.Description)
+    </td>
+</tr>

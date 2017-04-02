@@ -1,0 +1,50 @@
+﻿@model Web.Models.Tables.Teacher
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2 class="panel-title">Teacher Information</h2>
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MiddleName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MiddleName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+
+        </dl>
+
+
+        <p>
+            @Ajax.ActionLink("Edit", "Edit", "Teacher", new { id = Model.TeacherId }, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-info" }) |
+            @Ajax.ActionLink("Back", "Index", "Teacher", null, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-default" })
+        </p>
+    </div>
+</div>

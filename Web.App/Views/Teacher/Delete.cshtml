@@ -1,0 +1,58 @@
+﻿@model Web.Models.Tables.Teacher
+
+
+
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <h2 class="panel-title">Are you sure you want to delete this?</h2>
+    </div>
+    <div class="panel-body">
+        <div>
+            <h4>Teacher Information</h4>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MiddleName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MiddleName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+
+            </dl>
+
+            @using (Ajax.BeginForm("Delete", "Teacher", new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    @Ajax.ActionLink("Back", "Index", "Teacher", null, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-default" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

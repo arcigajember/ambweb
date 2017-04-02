@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Monitoring</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+<div class="navbar navbar-default navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Attendance Monitoring", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                @{
+                    if (Request.IsAuthenticated)
+                    {
+                        <li><a href="#" id="modal-message-btn" data-toggle="modal" data-target="#message-modal">Message</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-togle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://localhost:44333/idm/" target="_blank">Users</a></li>
+                                <li class="divider"></li>
+                                <li>@Html.ActionLink("Manage", "Index", "DataManage")</li>
+                                <li>@Html.ActionLink("Reports","Index","Report")</li>
+                            </ul>
+                        </li>
+                    }
+                }
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>
+@{
+    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+    if (controller != "Home")
+    {
+        <div class="container body-content">
+            @RenderBody()
+            <hr/>
+            <footer class="text-center">
+                <p>&copy; @DateTime.Now.Year - Concepcion Catholic School</p>
+            </footer>
+            <!--modal-->
+            <!--happy coding-->
+            <div class="modal fade" id="goodluck" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="modal-title">
+                                <h3>Good Day</h3>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="text-center">
+                                    <h3>Happy Coding</h3>
+                                    <h4>Good Luck</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end happy coding-->
+            <!--end modal-->
+        </div>
+    }
+    else
+    {
+        @RenderBody()
+    }
+
+}
+@Html.Partial("_MessagePartial")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/customScripts")
+@Styles.Render("~/Content/customCss")
+@RenderSection("scripts", required: false)
+</body>
+</html>

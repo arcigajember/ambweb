@@ -1,0 +1,70 @@
+﻿<div class="page-header">
+    <h2>Reports</h2>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h2 class="panel-title">Selection</h2>
+            </div>
+            <div class="panel-body">
+                <div class="btn-group btn-group-vertical">
+                    <a href="#" id="attendance-report" class="btn btn-info">Attendance</a>
+                    <a href="#" id="message-log" class="btn btn-info">Message</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div id="report-body">
+            <h2>Please select report</h2>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    <script>
+        $(document)
+            .ready(function() {
+                $("#attendance-report")
+                    .click(function() {
+                        $.ajax({
+                            type: "GET",
+                            url: "/Report/Attendance/",
+                            contentType: "application/json",
+                            dataType: "html",
+                            cache: false,
+                            success: function(data) {
+                                $("#report-body").html(data);
+                            },
+                            error: function(xhr, textStatus, error) {
+                                alert(xhr.responseText);
+                                alert(textStatus);
+                                alert(error);
+                            }
+                        });
+                    });
+                $("#message-log")
+                    .click(function() {
+                        $.ajax({
+                            type: "GET",
+                            url: "/Report/MessageLog/",
+                            contentType: "application/json",
+                            dataType: "html",
+                            cache: false,
+                            success: function(data) {
+                                $("#report-body").html(data);
+                            },
+                            error: function(xhr, textStatus, error) {
+                                alert(xhr.responseText);
+                                alert(textStatus);
+                                alert(error);
+                            }
+                        });
+                    });
+            });
+</script>
+}

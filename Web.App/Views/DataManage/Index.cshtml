@@ -1,0 +1,38 @@
+﻿@model Web.Models.MessageAlert
+
+<div class="page-header">
+    <h2>Manage Data</h2>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h2 class="panel-title">Category</h2>
+            </div>
+            <div class="panel-body">
+                <div class="btn-group-vertical">
+                    @Ajax.ActionLink("Student", "Index", "Student", null, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-default" })
+                    @Ajax.ActionLink("Guardian", "Index", "Guardian", null, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-default" })
+                    @Ajax.ActionLink("Teacher", "Index", "Teacher", null, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-default" })
+                    @Ajax.ActionLink("Section", "Index", "Section", null, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-default" })
+                    @Ajax.ActionLink("Subject", "Index", "Subject", null, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-default" })
+                    @Ajax.ActionLink("Room", "Index", "Room", null, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-default" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div id="ajaxDetails">
+            <h2>Please Select Category</h2>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/studentcontroller.js")"></script>
+   
+}

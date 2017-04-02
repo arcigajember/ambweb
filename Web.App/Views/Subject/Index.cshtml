@@ -1,0 +1,57 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Web.Models.Tables.Subject>
+
+@using (Ajax.BeginForm("Index", "Subject", new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }))
+{
+    <p>
+        Find by name: @Html.TextBox("searchString", ViewBag.SubjectFilter as string, new { @class = "form-control" })
+    </p>
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2 class="panel-title">Subject List @Ajax.ActionLink(" ", "Create", "Subject", null, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "glyphicon glyphicon-plus" })</h2>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                            Subject name
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SubjectName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-xs">
+                                    @Ajax.ActionLink("Edit", "Edit", "Subject", new { id = item.SubjectId }, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-info" })
+                                    @Ajax.ActionLink("Details", "Details", "Subject", new { id = item.SubjectId }, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-info" })
+                                    @Ajax.ActionLink("Delete", "Delete", "Subject", new { id = item.SubjectId }, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-danger" })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.SubjectFilter }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { UpdateTargetId = "ajaxDetails", HttpMethod = "GET", InsertionMode = InsertionMode.Replace }))
+    </div>
+</div>

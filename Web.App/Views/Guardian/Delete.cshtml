@@ -1,0 +1,91 @@
+﻿@model Web.Models.Tables.Guardian
+
+
+
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <h2 class="panel-title">Are you sure you want to delete this?</h2>
+    </div>
+    <div class="panel-body">
+        <div>
+            <h4>Guardian Information</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MiddleName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MiddleName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Street)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Street)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Barangay)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Barangay)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Municipality)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Municipality)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Province)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Province)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ContactNumber)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ContactNumber)
+                </dd>
+
+            </dl>
+
+            @using (Ajax.BeginForm("Delete", "Guardian", new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    @Ajax.ActionLink("Back", "Index", "Guardian", null, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-default" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

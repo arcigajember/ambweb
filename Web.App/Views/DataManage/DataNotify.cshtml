@@ -1,0 +1,38 @@
+﻿@model Web.Models.MessageAlert
+@{
+    if (Model != null)
+    {
+        if (Model.Status == "success")
+        {
+            <div id="success-alert" class="alert alert-success fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success: @Model.ControllerName @Model.Title</strong> @Model.Message
+            </div>
+        }
+        else if (Model.Status == "error")
+        {
+            <div id="success-alert" class="alert alert-danger fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Error: @Model.ControllerName @Model.Title</strong> @Model.Message
+            </div>
+        }
+        else if (Model.Status == "info")
+        {
+            <div id="success-alert" class="alert alert-info fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Info: @Model.ControllerName @Model.Title</strong> @Model.Message
+            </div>
+        }
+    }
+}
+<script>
+        $(document)
+            .ready(function () {
+                $("#success-alert")
+                    .fadeTo(10000, 1000)
+                    .slideUp(1000,
+                        function () {
+                            $("#success-alert").slideUp(1000);
+                        });
+            });
+</script>

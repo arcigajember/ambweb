@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C41D34E0-289C-466C-90B8-F5033C4F762E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Web.Models</RootNamespace>
+    <AssemblyName>Web.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MessageAlert.cs" />
+    <Compile Include="ModelView\AttendanceModelView.cs" />
+    <Compile Include="ModelView\GuardianContact.cs" />
+    <Compile Include="ModelView\Interfaces\IStudentDetailsView.cs" />
+    <Compile Include="ModelView\MessageLogView.cs" />
+    <Compile Include="ModelView\MessageView.cs" />
+    <Compile Include="ModelView\RegisterStudentView.cs" />
+    <Compile Include="ModelView\ReportSectionView.cs" />
+    <Compile Include="ModelView\SectionCreateView.cs" />
+    <Compile Include="ModelView\SectionReportView.cs" />
+    <Compile Include="ModelView\SectionSearch.cs" />
+    <Compile Include="ModelView\SectionView.cs" />
+    <Compile Include="ModelView\StudentDetailsView.cs" />
+    <Compile Include="ModelView\StudentSearchOption.cs" />
+    <Compile Include="ModelView\StudentSectionView.cs" />
+    <Compile Include="ModelView\StudentView.cs" />
+    <Compile Include="ModelView\SubjectSectionView.cs" />
+    <Compile Include="ModelView\TeacherAssignView.cs" />
+    <Compile Include="ModelView\TeacherSaveSchedule.cs" />
+    <Compile Include="ModelView\TeacherScheduleView.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tables\AspNetUsers.cs" />
+    <Compile Include="Tables\AttendanceHeader.cs" />
+    <Compile Include="Tables\AttendanceDetails.cs" />
+    <Compile Include="Tables\Guardian.cs" />
+    <Compile Include="Tables\AttendanceLog.cs" />
+    <Compile Include="Tables\Interfaces\IAspNetUsers.cs" />
+    <Compile Include="Tables\Interfaces\IAttendanceHeader.cs" />
+    <Compile Include="Tables\Interfaces\IAttendanceDetails.cs" />
+    <Compile Include="Tables\Interfaces\IAttendanceLog.cs" />
+    <Compile Include="Tables\Interfaces\IGuardian.cs" />
+    <Compile Include="Tables\Interfaces\IRoom.cs" />
+    <Compile Include="Tables\Interfaces\ISection.cs" />
+    <Compile Include="Tables\Interfaces\ISmsDetails.cs" />
+    <Compile Include="Tables\Interfaces\IStudent.cs" />
+    <Compile Include="Tables\Interfaces\IStudentGuardian.cs" />
+    <Compile Include="Tables\Interfaces\ISubject.cs" />
+    <Compile Include="Tables\Interfaces\ITeacher.cs" />
+    <Compile Include="Tables\Interfaces\ITeacherSchedule.cs" />
+    <Compile Include="Tables\Interfaces\ITimeType.cs" />
+    <Compile Include="Tables\Interfaces\IWeekDay.cs" />
+    <Compile Include="Tables\Room.cs" />
+    <Compile Include="Tables\Section.cs" />
+    <Compile Include="Tables\SmsDetails.cs" />
+    <Compile Include="Tables\Student.cs" />
+    <Compile Include="Tables\StudentGuardian.cs" />
+    <Compile Include="Tables\Subject.cs" />
+    <Compile Include="Tables\Teacher.cs" />
+    <Compile Include="Tables\TeacherSchedule.cs" />
+    <Compile Include="Tables\TimeType.cs" />
+    <Compile Include="Tables\WeekDay.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Diagram\erd.png" />
+    <Content Include="Scripts\GuardianDelete.sql" />
+    <Content Include="Scripts\GuardianInsert.sql" />
+    <Content Include="Scripts\GuardianSelectAll.sql" />
+    <Content Include="Scripts\GuardianUpdate.sql" />
+    <Content Include="Scripts\RoomDelete.sql" />
+    <Content Include="Scripts\RoomInsert.sql" />
+    <Content Include="Scripts\RoomSelectAll.sql" />
+    <Content Include="Scripts\RoomSelectById.sql" />
+    <Content Include="Scripts\RoomUpdate.sql" />
+    <Content Include="Scripts\SectionRoomInsert.sql" />
+    <Content Include="Scripts\SectionRoomSelectById.sql" />
+    <Content Include="Scripts\SectionSubjectInsert.sql" />
+    <Content Include="Scripts\SectionSubjectSelectById.sql" />
+    <Content Include="Scripts\StudentDelete.sql" />
+    <Content Include="Scripts\StudentGetIdentity.sql" />
+    <Content Include="Scripts\StudentInsert.sql" />
+    <Content Include="Scripts\StudentSelectAll.sql" />
+    <Content Include="Scripts\StudentSelectById.sql" />
+    <Content Include="Scripts\StudentUpdate.sql" />
+    <Content Include="Scripts\SubjectDelete.sql" />
+    <Content Include="Scripts\SubjectInsert.sql" />
+    <Content Include="Scripts\SubjectSelectAll.sql" />
+    <Content Include="Scripts\SubjectSelectById.sql" />
+    <Content Include="Scripts\SubjectUpdate.sql" />
+    <Content Include="Scripts\TeacherDelete.sql" />
+    <Content Include="Scripts\TeacherInsert.sql" />
+    <Content Include="Scripts\TeacherSelectAll.sql" />
+    <Content Include="Scripts\TeacherSelectById.sql" />
+    <Content Include="Scripts\TeacherUpdate.sql" />
+    <Content Include="Scripts\TimeTypeDelete.sql" />
+    <Content Include="Scripts\TimeTypeInsert.sql" />
+    <Content Include="Scripts\TimeTypeSelectAll.sql" />
+    <Content Include="Scripts\TimeTypeSelectById.sql" />
+    <Content Include="Scripts\TimeTypeUpdate.sql" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Database\20161202.bak" />
+    <None Include="Diagram\DataFlow Diagram.pdf" />
+    <None Include="Diagram\DataFlow Diagram.vsdx" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

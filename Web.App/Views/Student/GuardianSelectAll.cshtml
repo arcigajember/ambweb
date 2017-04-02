@@ -1,0 +1,131 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Web.Models.Tables.Guardian>
+
+
+@using (Ajax.BeginForm("GuardianSelectAll", "Student", new AjaxOptions { UpdateTargetId = "responseDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }))
+{
+    <p>
+        Find By Name: @Html.TextBox("searchString", ViewBag.GuadianPartialFilter as string, new { @class = "form-control", placeholder = "Search" })
+    </p>
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2 class="panel-title">Guardian List</h2>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div id="guardian-div" class="col-md-12">
+                    <div class="form-group">
+                        <label>Relation</label>
+                        <input type="text" id="relation" class="form-control" value="" placeholder="Relation with the student" />
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Full Name
+                                    </th>
+                                    <th>
+                                        Address
+                                    </th>
+                                    <th>
+                                        Select
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="guardian-body">
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FullName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FullAddress)
+                                        </td>
+                                        <td>
+                                            <input type="radio" name="radio" />
+                                            <input type="hidden" id="guardianHiddenId" value="@item.GuardianId"/>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination-sm">
+                        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                        @Html.PagedListPager(Model, page => Url.Action("GuardianSelectAll", new { page, currentFilter = ViewBag.GuardianPartialFilter }),
+                            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { UpdateTargetId = "responseDetails", HttpMethod = "GET", InsertionMode = InsertionMode.Replace }))
+                    </div>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-primary" id="btn-submit">Save</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script type="text/javascript">
+    $(document)
+        .ready(function () {
+            $("#btn-submit")
+                .click(function () {
+                    var selected = $("#guardian-body input[name=radio]:checked");
+                    debugger;
+                    if (selected.length) {
+                        var guardianId = selected.next().val();
+                        var studentId = $("#studentId").val();
+                        var relation = $("#relation").val();
+
+                        var model = {
+                            StudentId: studentId,
+                            GuardianId: guardianId,
+                            Relation: relation
+                        };
+
+                        if (relation.length) {
+                            debugger;
+                            $.ajax({
+                                type: "POST",
+                                url: "/Student/GuardianCreate/",
+                                data: JSON.stringify(model),
+                                contentType: "application/json; charset=utf-8",
+                                cache: false,
+                                dataType: "json",
+                                success: function (data) {
+                                    var x = data;
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "/Student/Edit/",
+                                        data: { id: x.StudentId },
+                                        contentType: "application/json",
+                                        cache: false,
+                                        dataType: "html",
+                                        success: function (result) {
+                                            $("#modal-close").trigger("click");
+                                            $('body').removeClass('modal-open');
+                                            $(".modal-backdrop").remove();
+                                            $("#ajaxDetails").html(result);
+                                        },
+                                        error: function (xhr, textStatus, error) {
+                                            alert(xhr.responseText);
+                                            alert(textStatus);
+                                            alert(error);
+                                        }
+
+                                    });
+
+                                }
+                            });
+                        } else {
+                            alert("Relation is empty");
+                        }
+                    } else {
+                        alert("Please select item");
+                    }
+                });
+        });
+</script>

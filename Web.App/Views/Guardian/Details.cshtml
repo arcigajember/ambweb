@@ -1,0 +1,81 @@
+﻿@model Web.Models.Tables.Guardian
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2 class="panel-title">Guardian Information</h2>
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MiddleName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MiddleName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Street)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Street)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Barangay)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Barangay)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Municipality)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Municipality)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Province)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Province)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactNumber)
+            </dd>
+
+        </dl>
+
+        <p>
+            @Ajax.ActionLink("Edit", "Edit", "Guardian", new { id = Model.GuardianId }, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-info" }) |
+            @Ajax.ActionLink("Back", "Index", "Guardian", null, new AjaxOptions { UpdateTargetId = "ajaxDetails", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "btn btn-default" })
+        </p>
+    </div>
+</div>
