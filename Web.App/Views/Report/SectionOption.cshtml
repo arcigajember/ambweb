@@ -55,7 +55,6 @@
     <div class="panel-body">
         @using (Ajax.BeginForm("SectionSearch", "Report", new AjaxOptions { UpdateTargetId = "search-result", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnComplete = "$('#search-result').show('slow').fadeIn('slow');" }))
         {
-            @Html.AntiForgeryToken()
             <div class="container">
                 <div class="row">
                     <fieldset class="fieldset">
