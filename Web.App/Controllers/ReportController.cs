@@ -83,7 +83,6 @@ namespace Web.App.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> SectionSearch(SectionSearch model, int? page)
         {
             if (!ModelState.IsValid)
@@ -109,10 +108,7 @@ namespace Web.App.Controllers
                         await _attendanceRepo.AttendanceStudent(student.StudentId, model.DateFrom, model.DateTo);
                 }
             }
-
-            const int pageSize = 5;
-            int pageNumber = page ?? 1;
-            return PartialView(studentLst.ToPagedList(pageNumber, pageSize));
+            return PartialView(studentLst);
         }
 
         public async Task<ActionResult> StudentOption()
