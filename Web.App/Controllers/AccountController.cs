@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Web.App.Models;
+using Web.App.Util;
 
 namespace Web.App.Controllers
 {
@@ -388,6 +389,7 @@ namespace Web.App.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
+        [Audit]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

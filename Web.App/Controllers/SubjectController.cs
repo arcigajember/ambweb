@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Web.App.Util;
 using Web.DataLayer.Repositories;
 using Web.Models;
 using Web.Models.Tables;
@@ -23,6 +24,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Subject
+        [Audit]
         public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
         {
             if (!string.IsNullOrEmpty(searchString))
@@ -51,6 +53,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Subject/Details/5
+        [Audit]
         public async Task<ActionResult>Details(int? id)
         {
             MessageAlert messageAlert;
@@ -85,6 +88,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Subject/Create
+        [Audit]
         public ActionResult Create()
         {
             return View();
@@ -92,6 +96,7 @@ namespace Web.App.Controllers
 
         // POST: Subject/Create
         [HttpPost]
+        [Audit]
         public async Task<ActionResult>Create([Bind(Include = "SubjectName, Description")]Subject subject)
         {
             MessageAlert messageAlert;
@@ -142,6 +147,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Subject/Edit/5
+        [Audit]
         public async Task<ActionResult> Edit(int? id)
         {
             MessageAlert messageAlert;
@@ -175,8 +181,9 @@ namespace Web.App.Controllers
         }
 
         // POST: Subject/Edit/5
-        [HttpPost, ActionName("Edit")]
-        public async Task<ActionResult> Edit()
+        [HttpPost]
+        [Audit]
+        public async Task<ActionResult> Edit(Subject s)
         {
             MessageAlert messageAlert;
             Subject subject = new Subject();
@@ -213,6 +220,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Subject/Delete/5
+        [Audit]
         public async Task<ActionResult> Delete(int? id)
         {
             MessageAlert messageAlert;
@@ -248,6 +256,7 @@ namespace Web.App.Controllers
 
         // POST: Subject/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Audit]
         public async Task<ActionResult> DeletePost(int? id)
         {
             try

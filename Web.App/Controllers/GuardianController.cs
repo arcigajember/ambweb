@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Web.App.Util;
 using Web.DataLayer.Repositories;
 using Web.Models;
 using Web.Models.Tables;
@@ -23,6 +24,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Guardian
+        [Audit]
         public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
         {
             if (!string.IsNullOrEmpty(searchString))
@@ -52,6 +54,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Guardian/Details/5
+        [Audit]
         public async Task<ActionResult> Details(int? id)
         {
             MessageAlert messageAlert;
@@ -87,6 +90,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Guardian/Create
+        [Audit]
         public ActionResult Create()
         {
             return PartialView();
@@ -95,6 +99,7 @@ namespace Web.App.Controllers
         // POST: Guardian/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> Create([Bind(Include = "FirstName, LastName, MiddleName, Street, Barangay, Municipality, Province, ContactNumber")]Guardian guardian)
         {
             MessageAlert messageAlert;
@@ -149,6 +154,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Guardian/Edit/5
+        [Audit]
         public async Task<ActionResult> Edit(int? id)
         {
             MessageAlert messageAlert;
@@ -186,7 +192,8 @@ namespace Web.App.Controllers
         // POST: Guardian/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit()
+        [Audit]
+        public async Task<ActionResult> Edit(Guardian m)
         {
             MessageAlert messageAlert;
             Guardian guardian = new Guardian();
@@ -229,6 +236,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Guardian/Delete/5
+        [Audit]
         public async Task<ActionResult> Delete(int? id)
         {
             MessageAlert messageAlert;
@@ -265,6 +273,7 @@ namespace Web.App.Controllers
         // POST: Guardian/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> DeletePost(int? id)
         {
             try

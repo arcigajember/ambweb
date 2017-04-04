@@ -11,6 +11,7 @@ using Web.Models;
 using Web.Models.ModelView;
 using Web.Models.ModelView.Interfaces;
 using Web.Models.Tables;
+using Web.App.Util;
 
 namespace Web.App.Controllers
 {
@@ -28,6 +29,7 @@ namespace Web.App.Controllers
             _sectionRepo = new SectionRepository();
         }
         // GET: Student
+        [Audit]
         public async Task<PartialViewResult> Index(string searchString, string currentFilter, int? page)
         {
             if (!string.IsNullOrEmpty(searchString))
@@ -59,6 +61,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Student/Details/5
+        [Audit]
         public async Task<ActionResult> Details(int? id)
         {
             MessageAlert messageAlert;
@@ -98,6 +101,7 @@ namespace Web.App.Controllers
 
         // GET: Student/Create
         [HttpGet]
+        [Audit]
         public async Task<ActionResult> Create()
         {
             var id = Convert.ToString(await _studentRepo.GetIdentity());
@@ -128,6 +132,7 @@ namespace Web.App.Controllers
         // POST: Student/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> Create([Bind(Include = "StudentNumber, FirstName, LastName, MiddleName, Street, Barangay, Municipality, Province, ContactNumber, Status, Gender")]Student student)
         {
             MessageAlert messageAlert;
@@ -179,6 +184,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Student/Edit/5
+        [Audit]
         public async Task<ActionResult> Edit(int? id)
         {
             MessageAlert messageAlert;
@@ -220,7 +226,8 @@ namespace Web.App.Controllers
         // POST: Student/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit()
+        [Audit]
+        public async Task<ActionResult> Edit(StudentDetailsView m)
         {
             MessageAlert messageAlert;
             StudentDetailsView modelView = new StudentDetailsView();
@@ -263,6 +270,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Student/Delete/5
+        [Audit]
         public async Task<ActionResult> Delete(int? id)
         {
             MessageAlert messageAlert;
@@ -300,6 +308,7 @@ namespace Web.App.Controllers
         // POST: Student/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> DeletePost(int? id)
         {
 
@@ -350,6 +359,7 @@ namespace Web.App.Controllers
             return RedirectToAction("Index", "DataManage");
         }
 
+        [Audit]
         public async Task<ActionResult> GuardianSelectAll(string searchString, string currentFilter, int? page)
         {
             if (!string.IsNullOrEmpty(searchString))
@@ -380,6 +390,7 @@ namespace Web.App.Controllers
         }
 
         [HttpPost]
+        [Audit]
         public async Task<ActionResult> GuardianCreate(StudentView model)
         {
             try
@@ -430,6 +441,7 @@ namespace Web.App.Controllers
         }
 
         [HttpGet]
+        [Audit]
         public async Task<ActionResult> SectionSelectAll(string searchString, string currentFilter, int? page)
         {
             if (!string.IsNullOrEmpty(searchString))
@@ -457,6 +469,7 @@ namespace Web.App.Controllers
         }
 
         [HttpPost]
+        [Audit]
         public async Task<ActionResult> StudentSectionCreate(StudentSectionView model)
         {
             await _studentRepo.SectionInsert(model);
@@ -464,6 +477,7 @@ namespace Web.App.Controllers
         }
 
         [HttpPost]
+        [Audit]
         public async Task<ActionResult> StudentGuardianDelete(int? studentId, int? guardianId)
         {
             try

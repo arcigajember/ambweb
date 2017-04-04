@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Web.App.Util;
 using Web.DataLayer.Repositories;
 using Web.Models;
 using Web.Models.ModelView;
@@ -28,6 +29,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Teacher
+        [Audit]
         public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
         {
             if (!string.IsNullOrEmpty(searchString))
@@ -57,6 +59,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Teacher/Details/5
+        [Audit]
         public async Task<ActionResult> Details(int? id)
         {
             MessageAlert messageAlert;
@@ -92,6 +95,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Teacher/Create
+        [Audit]
         public ActionResult Create()
         {
             return PartialView();
@@ -100,6 +104,7 @@ namespace Web.App.Controllers
         // POST: Teacher/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> Create([Bind(Include = "FirstName, LastName, MiddleName, Address")]Teacher teacher)
         {
             MessageAlert messageAlert;
@@ -151,6 +156,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Teacher/Edit/5
+        [Audit]
         public async Task<ActionResult> Edit(int? id)
         {
             MessageAlert messageAlert;
@@ -188,7 +194,8 @@ namespace Web.App.Controllers
         // POST: Teacher/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit()
+        [Audit]
+        public async Task<ActionResult> Edit(Teacher m)
         {
             MessageAlert messageAlert;
             Teacher teacher = new Teacher();
@@ -225,6 +232,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Teacher/Delete/5
+        [Audit]
         public async Task<ActionResult> Delete(int? id)
         {
             MessageAlert messageAlert;
@@ -262,6 +270,7 @@ namespace Web.App.Controllers
         // POST: Teacher/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> DeletePost(int? id)
         {
             try
@@ -297,6 +306,7 @@ namespace Web.App.Controllers
             return RedirectToAction("Index", "DataManage");
         }
 
+        [Audit]
         public async Task<ActionResult> Schedule(int? id)
         {
             MessageAlert messageAlert;
@@ -340,11 +350,7 @@ namespace Web.App.Controllers
             return PartialView(modelView);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id">TeacherId</param>
-        /// <returns></returns>
+        [Audit]
         public async Task<ActionResult> ScheduleAssign(int? id)
         {
             MessageAlert messageAlert;
@@ -388,6 +394,7 @@ namespace Web.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> ScheduleAssign(TeacherSaveSchedule model)
         {
             MessageAlert messageAlert;

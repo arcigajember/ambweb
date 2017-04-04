@@ -37,7 +37,6 @@
   <ItemGroup>
     <Reference Include="MiFare.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MiFare.1.0\lib\net45\MiFare.Desktop.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

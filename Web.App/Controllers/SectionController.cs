@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Web.App.Util;
 using Web.DataLayer.Repositories;
 using Web.DataLayer.Util;
 using Web.Models;
@@ -26,6 +27,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Section
+        [Audit]
         public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
         {
             if (!string.IsNullOrEmpty(searchString))
@@ -55,6 +57,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Section/Create
+        [Audit]
         public ActionResult Create()
         {
             return PartialView();
@@ -63,6 +66,7 @@ namespace Web.App.Controllers
         // POST: Section/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> Create([Bind(Include = "SectionName")]Section section)
         {
             MessageAlert messageAlert;
@@ -116,6 +120,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Section/Edit/5
+        [Audit]
         public async Task<ActionResult> Edit(int? id)
         {
             MessageAlert messageAlert;
@@ -158,6 +163,7 @@ namespace Web.App.Controllers
         // POST: Section/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> Edit(SectionCreateView modelView)
         {
             try
@@ -199,6 +205,7 @@ namespace Web.App.Controllers
         }
 
         // GET: Section/Delete/5
+        [Audit]
         public async Task<ActionResult> Delete(int? id)
         {
             MessageAlert messageAlert;
@@ -235,6 +242,7 @@ namespace Web.App.Controllers
         // POST: Section/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> DeletePost(int? id)
         {
             try
