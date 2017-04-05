@@ -33,18 +33,18 @@ namespace Web.DataLayer.Repositories
                 commandType: CommandType.StoredProcedure);
         }
 
-        public IEnumerable<AuditModel> SelectAll()
+        public async Task<IEnumerable<AuditModel>> SelectAll()
         {
-            return  _dbContext.Connection.Query<AuditModel>("AuditLogSelect",
+            return await _dbContext.Connection.QueryAsync<AuditModel>("AuditLogSelect",
                 commandType: CommandType.StoredProcedure);
         }
 
-        public AuditModel SelectById(Guid id)
+        public async Task<AuditModel> SelectById(Guid? id)
         {
             var p = new DynamicParameters();
             p.Add("@AuditId", id);
 
-            IEnumerable<AuditModel> result =  _dbContext.Connection.Query<AuditModel>("AuditLogSelectById", p,
+            IEnumerable<AuditModel> result = await  _dbContext.Connection.QueryAsync<AuditModel>("AuditLogSelectById", p,
                 commandType: CommandType.StoredProcedure);
 
             return result.ToList().FirstOrDefault();

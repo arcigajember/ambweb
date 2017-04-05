@@ -12,6 +12,7 @@
                 <div class="btn-group btn-group-vertical">
                     <a href="#" id="attendance-report" class="btn btn-info">Attendance</a>
                     <a href="#" id="message-log" class="btn btn-info">Message</a>
+                    <a href="#" id="audit-log" class="btn btn-info">AuditLog</a>
                 </div>
             </div>
         </div>
@@ -28,7 +29,25 @@
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
     <script>
         $(document)
-            .ready(function() {
+            .ready(function () {
+                $("#audit-log")
+                    .click(function () {
+                        $.ajax({
+                            type: "GET",
+                            url: "/Report/Audit/",
+                            contentType: "application/json",
+                            dataType: "html",
+                            cache: false,
+                            success: function (data) {
+                                $("#report-body").html(data);
+                            },
+                            error: function (xhr, textStatus, error) {
+                                alert(xhr.responseText);
+                                alert(textStatus);
+                                alert(error);
+                            }
+                        });
+                    });
                 $("#attendance-report")
                     .click(function() {
                         $.ajax({

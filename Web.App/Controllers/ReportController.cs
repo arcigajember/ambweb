@@ -10,6 +10,8 @@ using Web.Models.ModelView;
 using Web.Models.Tables;
 using System.Web;
 using Web.App.Util;
+using System;
+using System.Net;
 
 namespace Web.App.Controllers
 {
@@ -19,12 +21,14 @@ namespace Web.App.Controllers
         private readonly SectionRepository _sectionRepo;
         private readonly AttendanceSectionRepository _attendanceRepo;
         private readonly StudentRepository _studentRepo;
+        private readonly AuditLogRepository _auditRepo;
 
         public ReportController()
         {
             _studentRepo = new StudentRepository();
             _attendanceRepo = new AttendanceSectionRepository();
             _sectionRepo = new SectionRepository();
+            _auditRepo = new AuditLogRepository();
         }
         // GET: Report
         [Audit]
@@ -154,6 +158,64 @@ namespace Web.App.Controllers
             };
             TempData["messageAlert"] = messageAlert;
             return RedirectToAction("Index", "DataManage");
+        }
+
+        [Audit]
+        public async Task<ActionResult> Audit(DateTime? searchFrom, DateTime? searchTo, DateTime? currentSearchFrom, DateTime? currentSearchTo, int? page)
+        {
+            try
+            {
+                if (searchFrom != null && searchTo != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchFrom = currentSearchFrom;
+                    searchTo = currentSearchTo;
+                }
+                ViewBag.SearchFrom = searchFrom;
+                ViewBag.SearchTo = searchTo;
+
+                var auditList = await _auditRepo.SelectAll();
+
+                if (searchFrom != null && searchTo != null)
+                {
+                    auditList = auditList.AsQueryable()
+                        .Where(m => m.Timeaccessed.Date >= searchFrom &&
+                                  m.Timeaccessed.Date <= searchTo)
+                        .Select(s => s);
+                }
+
+                const int pageSize = 15;
+                int pageNumber = (page ?? 1);
+
+                return PartialView("Audit", auditList.ToPagedList(pageNumber, pageSize));
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<ActionResult> View(Guid? id)
+        {
+            try
+            {
+                if(id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var result = await _auditRepo.SelectById(id);
+                result.Parameters = result.Parameters.Replace("\r", "<br/>").Replace("\n", "<br/>");
+
+                return PartialView(result);
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
     }
 }

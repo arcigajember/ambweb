@@ -7,8 +7,8 @@ namespace Web.DataLayer.Interface
 {
     public interface IAuditLogRepository
     {
-        IEnumerable<AuditModel> SelectAll();
-        AuditModel SelectById(Guid id);
+        Task<IEnumerable<AuditModel>> SelectAll();
+        Task<AuditModel> SelectById(Guid? id);
         void Insert(AuditModel model);
     };
 }

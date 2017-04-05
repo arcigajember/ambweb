@@ -8,5 +8,6 @@ AS
                 al.Timeaccessed,
 			 al.IPAddress,
 			 al.Parameters
-         FROM dbo.AuditLog al;
+         FROM dbo.AuditLog al
+	    ORDER BY al.Timeaccessed DESC;
      END;

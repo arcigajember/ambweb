@@ -1,4 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using PagedList;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 using Web.App.Util;
 using Web.DataLayer.Repositories;
 
@@ -17,9 +21,34 @@ namespace Web.App.Controllers
         //TODO: Need to add UI
         // GET: Audit
         [Audit]
-        public ActionResult Index()
+        public async Task<ActionResult> Index(DateTime? searchFrom, DateTime? searchTo, DateTime? currentSearchFrom, DateTime? currentSearchTo, int? page)
         {
-            return View();
+            if(searchFrom != null && searchTo != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchFrom = currentSearchFrom;
+                searchTo = currentSearchTo;
+            }
+            ViewBag.SearchFrom = searchFrom;
+            ViewBag.SearchTo = searchTo;
+
+            var auditList = await _auditRepo.SelectAll();
+
+            if (searchFrom != null && searchTo != null)
+            {
+                auditList = auditList.AsQueryable()
+                    .Where(m => m.Timeaccessed.Date >= searchFrom &&
+                              m.Timeaccessed.Date <= searchTo)
+                    .Select(s => s);
+            }
+
+            const int pageSize = 8;
+            int pageNumber = (page ?? 1);
+
+            return PartialView("Index", auditList.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Audit/Details/5

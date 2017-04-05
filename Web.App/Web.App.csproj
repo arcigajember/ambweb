@@ -417,10 +417,12 @@
     <Content Include="Views\Report\MessageLogAttendance.cshtml" />
     <Content Include="Views\Report\SmsLog.cshtml" />
     <Content Include="Views\AttendanceReporting\Index.cshtml" />
+    <Content Include="Views\Audit\Index.cshtml" />
+    <Content Include="Views\Report\Audit.cshtml" />
+    <Content Include="Views\Report\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Audit\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

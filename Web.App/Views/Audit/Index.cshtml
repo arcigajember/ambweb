@@ -1,0 +1,15 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Web.Models.Tables.AuditModel>
+
+@using(Ajax.BeginForm("Index","Audit", new AjaxOptions { UpdateTargetId = "report-body", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }))
+{
+    <div class="form-inline">
+        <div class="form-group">
+            <label for="searchFrom">Date From:</label>
+            <input type="date" id="searchFrom" name="searchFrom" class="form-control" required/>
+            <label for="searchTo">Date To:</label>
+            <input type="date" id="searchTo" name="searchTo" class="form-control" required/>
+            <input type="submit" id="submit" value="Search" class="btn btn-default"/>
+        </div>
+    </div>
+}
