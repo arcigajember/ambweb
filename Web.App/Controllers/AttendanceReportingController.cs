@@ -3,12 +3,15 @@ using System.IO;
 using System.Net;
 using System.Web.Mvc;
 using Web.App.Reports;
+using Web.App.Util;
 
 namespace Web.App.Controllers
 {
     public class AttendanceReportingController : Controller
     {
         // GET: AttendanceReporting
+        [Authorize]
+        [Audit]
         public ActionResult Index(int? sectionId, string dateFrom, string dateTo)
         {
             try

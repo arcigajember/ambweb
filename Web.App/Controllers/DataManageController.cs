@@ -13,6 +13,7 @@ using Web.Models;
 using Web.Models.ModelView;
 using Web.Models.Tables;
 using System.Security.Claims;
+using Web.App.Util;
 
 namespace Web.App.Controllers
 {
@@ -27,7 +28,9 @@ namespace Web.App.Controllers
             _messageRepo = new MessageRepository();
             _sectionRepo = new SectionRepository();
         }
+
         // GET: DataManage
+        [Audit]
         public ActionResult Index()
         {
             Response.Cache.SetCacheability(HttpCacheability.NoCache);  // HTTP 1.1.
@@ -42,6 +45,7 @@ namespace Web.App.Controllers
             return View();
         }
 
+        [Audit]
         public async Task<ActionResult> Message()
         {
             IEnumerable<Section> section = await _sectionRepo.SelectAllWithRoom();
@@ -55,6 +59,7 @@ namespace Web.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> Message(MessageView model)
         {
             try
@@ -107,6 +112,9 @@ namespace Web.App.Controllers
             }
             return PartialView("Error");
         }
+
+        [AllowAnonymous]
+        [Audit]
         public async Task<ActionResult> Login(string returnUrl)
         {
             ApplicationUser member =

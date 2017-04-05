@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Web.App.Models;
+using Web.App.Util;
 
 namespace Web.App.Controllers
 {
@@ -51,6 +52,7 @@ namespace Web.App.Controllers
 
         //
         // GET: /Manage/Index
+        [Audit]
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -214,6 +216,7 @@ namespace Web.App.Controllers
 
         //
         // GET: /Manage/ChangePassword
+        [Audit]
         public ActionResult ChangePassword()
         {
             return View();
@@ -223,6 +226,7 @@ namespace Web.App.Controllers
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -245,6 +249,7 @@ namespace Web.App.Controllers
 
         //
         // GET: /Manage/SetPassword
+        [Audit]
         public ActionResult SetPassword()
         {
             return View();
@@ -254,6 +259,7 @@ namespace Web.App.Controllers
         // POST: /Manage/SetPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
         {
             if (ModelState.IsValid)

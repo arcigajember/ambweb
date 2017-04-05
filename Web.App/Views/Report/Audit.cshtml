@@ -1,0 +1,88 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Web.Models.Tables.AuditModel>
+
+@using (Ajax.BeginForm("Audit", "Report", new AjaxOptions { UpdateTargetId = "report-body", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }))
+{
+    <div class="form-inline">
+        <div class="form-group">
+            <label for="searchFrom">Date From:</label>
+            <input type="date" id="searchFrom" name="searchFrom" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="searchTo">Date To:</label>
+            <input type="date" id="searchTo" name="searchTo" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="submitBtn">Filter</label>
+            <input type="submit" id="submitBtn" name="searchTo" class="form-control btn btn-primary" />
+        </div>
+    </div>
+}
+<br/>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-title">Audit Log</div>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                            Audit Id
+                        </th>
+                        <th>
+                            UserName
+                        </th>
+                        <th>
+                            IP Address
+                        </th>
+                        <th>
+                            Area Accessed
+                        </th>
+                        <th>
+                            Parameters
+                        </th>
+                        <th>
+                            Time Accessed
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => item.AuditId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.IPAddress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.AreaAccessed)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Parameters)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Timeaccessed)
+                            </td>
+                            <td>
+                                @Ajax.ActionLink("View","View", new { id = item.AuditId },new AjaxOptions { UpdateTargetId = "report-body", InsertionMode = InsertionMode.Replace, HttpMethod = "GET"}, new { @class="btn-sm btn-primary"})
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Audit", new { page, currentSearchFrom = ViewBag.SearchFrom, currentSearchTo = ViewBag.SearchTo })
+                , PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions { UpdateTargetId = "report-body", HttpMethod = "GET", InsertionMode = InsertionMode.Replace }))
+        </div>
+    </div>
+</div>

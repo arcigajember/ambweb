@@ -9,6 +9,9 @@ using Web.Models;
 using Web.Models.ModelView;
 using Web.Models.Tables;
 using System.Web;
+using Web.App.Util;
+using System;
+using System.Net;
 
 namespace Web.App.Controllers
 {
@@ -18,14 +21,17 @@ namespace Web.App.Controllers
         private readonly SectionRepository _sectionRepo;
         private readonly AttendanceSectionRepository _attendanceRepo;
         private readonly StudentRepository _studentRepo;
+        private readonly AuditLogRepository _auditRepo;
 
         public ReportController()
         {
             _studentRepo = new StudentRepository();
             _attendanceRepo = new AttendanceSectionRepository();
             _sectionRepo = new SectionRepository();
+            _auditRepo = new AuditLogRepository();
         }
         // GET: Report
+        [Audit]
         public ActionResult Index()
         {
             Response.Cache.SetCacheability(HttpCacheability.NoCache);  // HTTP 1.1.
@@ -35,12 +41,14 @@ namespace Web.App.Controllers
             return View();
         }
 
+        [Audit]
         public ActionResult Attendance()
         {
 
             return PartialView();
         }
 
+        [Audit]
         public ActionResult MessageLog()
         {
             var model = new MessageLogView();
@@ -50,6 +58,7 @@ namespace Web.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> MessageLogResult(MessageLogView model)
         {
              if (ModelState.IsValid)
@@ -76,6 +85,7 @@ namespace Web.App.Controllers
 
         }
 
+        [Audit]
         public async Task<ActionResult> SectionOption()
         {
             var modelView = new SectionReportView(await _sectionRepo.SelectAllWithRoom());
@@ -83,6 +93,7 @@ namespace Web.App.Controllers
         }
 
         [HttpPost]
+        [Audit]
         public async Task<ActionResult> SectionSearch(SectionSearch model, int? page)
         {
             if (!ModelState.IsValid)
@@ -111,6 +122,7 @@ namespace Web.App.Controllers
             return PartialView(studentLst);
         }
 
+        [Audit]
         public async Task<ActionResult> StudentOption()
         {
             IEnumerable<Student> section = await _studentRepo.SelectAll();
@@ -123,6 +135,7 @@ namespace Web.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Audit]
         public async Task<ActionResult> StudentSearch(StudentSearchOption modelView)
         {
             if (ModelState.IsValid)
@@ -145,6 +158,64 @@ namespace Web.App.Controllers
             };
             TempData["messageAlert"] = messageAlert;
             return RedirectToAction("Index", "DataManage");
+        }
+
+        [Audit]
+        public async Task<ActionResult> Audit(DateTime? searchFrom, DateTime? searchTo, DateTime? currentSearchFrom, DateTime? currentSearchTo, int? page)
+        {
+            try
+            {
+                if (searchFrom != null && searchTo != null)
+                {
+                    page = 1;
+                }
+                else
+                {
+                    searchFrom = currentSearchFrom;
+                    searchTo = currentSearchTo;
+                }
+                ViewBag.SearchFrom = searchFrom;
+                ViewBag.SearchTo = searchTo;
+
+                var auditList = await _auditRepo.SelectAll();
+
+                if (searchFrom != null && searchTo != null)
+                {
+                    auditList = auditList.AsQueryable()
+                        .Where(m => m.Timeaccessed.Date >= searchFrom &&
+                                  m.Timeaccessed.Date <= searchTo)
+                        .Select(s => s);
+                }
+
+                const int pageSize = 15;
+                int pageNumber = (page ?? 1);
+
+                return PartialView("Audit", auditList.ToPagedList(pageNumber, pageSize));
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task<ActionResult> View(Guid? id)
+        {
+            try
+            {
+                if(id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var result = await _auditRepo.SelectById(id);
+                result.Parameters = result.Parameters.Replace("\r", "<br/>").Replace("\n", "<br/>");
+
+                return PartialView(result);
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
     }
 }

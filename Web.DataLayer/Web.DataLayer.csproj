@@ -34,9 +34,8 @@
       <HintPath>..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -50,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interface\IAttendanceSectionRepository.cs" />
+    <Compile Include="Interface\IAuditLogRepository.cs" />
     <Compile Include="Interface\IDefaultRepository.cs" />
     <Compile Include="Interface\IGuardianRepository.cs" />
     <Compile Include="Interface\IMessageRepository.cs" />
@@ -59,6 +59,7 @@
     <Compile Include="Interface\ITeacherRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AttendanceSectionRepository.cs" />
+    <Compile Include="Repositories\AuditLogRepository.cs" />
     <Compile Include="Repositories\GuardianRepository.cs" />
     <Compile Include="Repositories\MessageRepository.cs" />
     <Compile Include="Repositories\RoomRepository.cs" />
