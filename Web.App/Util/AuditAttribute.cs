@@ -19,7 +19,7 @@ namespace Web.App.Util
                 AuditId = Guid.NewGuid(),
                 UserName = (request.IsAuthenticated) ? filterContext.HttpContext.User.Identity.Name : "Anonymous",
                 AreaAccessed = request.RawUrl,
-                Timeaccessed = DateTime.UtcNow,
+                Timeaccessed = DateTime.Now,
                 IPAddress = request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? request.UserHostAddress,
                 Parameters = paramsString
             };

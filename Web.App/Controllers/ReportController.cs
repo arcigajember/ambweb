@@ -160,7 +160,7 @@ namespace Web.App.Controllers
             return RedirectToAction("Index", "DataManage");
         }
 
-        [Audit]
+
         public async Task<ActionResult> Audit(DateTime? searchFrom, DateTime? searchTo, DateTime? currentSearchFrom, DateTime? currentSearchTo, int? page)
         {
             try
@@ -208,7 +208,10 @@ namespace Web.App.Controllers
                 }
 
                 var result = await _auditRepo.SelectById(id);
-                result.Parameters = result.Parameters.Replace("\r", "<br/>").Replace("\n", "<br/>");
+                result.Parameters = result.Parameters
+                    .Replace("\r", "<br/>")
+                    .Replace("\n", "<br/>")
+                    .Replace("\"", "");
 
                 return PartialView(result);
             }

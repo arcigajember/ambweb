@@ -198,7 +198,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AttendanceReportingController.cs" />
-    <Compile Include="Controllers\AuditController.cs" />
     <Compile Include="Controllers\DataManageController.cs" />
     <Compile Include="Controllers\GuardianController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -417,7 +416,6 @@
     <Content Include="Views\Report\MessageLogAttendance.cshtml" />
     <Content Include="Views\Report\SmsLog.cshtml" />
     <Content Include="Views\AttendanceReporting\Index.cshtml" />
-    <Content Include="Views\Audit\Index.cshtml" />
     <Content Include="Views\Report\Audit.cshtml" />
     <Content Include="Views\Report\View.cshtml" />
   </ItemGroup>
