@@ -30,7 +30,6 @@ namespace Web.App.Controllers
         }
 
         // GET: DataManage
-        [Audit]
         public ActionResult Index()
         {
             Response.Cache.SetCacheability(HttpCacheability.NoCache);  // HTTP 1.1.
@@ -45,7 +44,6 @@ namespace Web.App.Controllers
             return View();
         }
 
-        [Audit]
         public async Task<ActionResult> Message()
         {
             IEnumerable<Section> section = await _sectionRepo.SelectAllWithRoom();
@@ -59,7 +57,6 @@ namespace Web.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Audit]
         public async Task<ActionResult> Message(MessageView model)
         {
             try

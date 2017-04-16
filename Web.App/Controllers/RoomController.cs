@@ -23,7 +23,6 @@ namespace Web.App.Controllers
             _roomRepo = new RoomRepository();
         }
         // GET: Room
-        [Audit]
         public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
         {
             if (!string.IsNullOrEmpty(searchString))
@@ -53,7 +52,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Room/Details/5
-        [Audit]
         public async Task<ActionResult> Details(int? id)
         {
             MessageAlert messageAlert;
@@ -89,7 +87,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Room/Create
-        [Audit]
         public ActionResult Create()
         {
             return PartialView();
@@ -150,7 +147,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Room/Edit/5
-        [Audit]
         public async Task<ActionResult> Edit(int? id)
         {
             MessageAlert messageAlert;
@@ -229,7 +225,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Room/Delete/5
-        [Audit]
         public async Task<ActionResult> Delete(int? id)
         {
             MessageAlert messageAlert;

@@ -24,7 +24,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Subject
-        [Audit]
         public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
         {
             if (!string.IsNullOrEmpty(searchString))
@@ -53,7 +52,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Subject/Details/5
-        [Audit]
         public async Task<ActionResult>Details(int? id)
         {
             MessageAlert messageAlert;
@@ -88,7 +86,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Subject/Create
-        [Audit]
         public ActionResult Create()
         {
             return View();
@@ -147,7 +144,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Subject/Edit/5
-        [Audit]
         public async Task<ActionResult> Edit(int? id)
         {
             MessageAlert messageAlert;
@@ -220,7 +216,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Subject/Delete/5
-        [Audit]
         public async Task<ActionResult> Delete(int? id)
         {
             MessageAlert messageAlert;

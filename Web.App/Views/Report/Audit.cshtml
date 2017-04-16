@@ -38,17 +38,17 @@
                             IP Address
                         </th>
                         <th>
-                            Area Accessed
+                            Action
                         </th>
-                        <th>
+                        @*<th>
                             Parameters
-                        </th>
+                        </th>*@
                         <th>
                             Time Accessed
                         </th>
-                        <th>
+                        @*<th>
                             Action
-                        </th>
+                        </th>*@
                     </tr>
                 </thead>
                 <tbody>
@@ -67,15 +67,15 @@
                             <td>
                                 @Html.DisplayFor(m => item.AreaAccessed)
                             </td>
-                            <td>
+                            @*<td>
                                 @Html.DisplayFor(m => item.Parameters)
-                            </td>
+                            </td>*@
                             <td>
                                 @Html.DisplayFor(m => item.Timeaccessed)
                             </td>
-                            <td>
+                            @*<td>
                                 @Ajax.ActionLink("View","View", new { id = item.AuditId },new AjaxOptions { UpdateTargetId = "report-body", InsertionMode = InsertionMode.Replace, HttpMethod = "GET"}, new { @class="btn-sm btn-primary"})
-                            </td>
+                            </td>*@
                         </tr>
                     }
                 </tbody>
