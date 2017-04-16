@@ -31,7 +31,6 @@ namespace Web.App.Controllers
             _auditRepo = new AuditLogRepository();
         }
         // GET: Report
-        [Audit]
         public ActionResult Index()
         {
             Response.Cache.SetCacheability(HttpCacheability.NoCache);  // HTTP 1.1.
@@ -40,15 +39,13 @@ namespace Web.App.Controllers
             Response.AppendHeader("Expires", "0"); // Proxies.
             return View();
         }
-
-        [Audit]
+        
         public ActionResult Attendance()
         {
 
             return PartialView();
         }
-
-        [Audit]
+        
         public ActionResult MessageLog()
         {
             var model = new MessageLogView();
@@ -58,7 +55,6 @@ namespace Web.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Audit]
         public async Task<ActionResult> MessageLogResult(MessageLogView model)
         {
              if (ModelState.IsValid)
@@ -84,8 +80,7 @@ namespace Web.App.Controllers
             return RedirectToAction("Index", "DataManage");
 
         }
-
-        [Audit]
+        
         public async Task<ActionResult> SectionOption()
         {
             var modelView = new SectionReportView(await _sectionRepo.SelectAllWithRoom());
@@ -93,7 +88,6 @@ namespace Web.App.Controllers
         }
 
         [HttpPost]
-        [Audit]
         public async Task<ActionResult> SectionSearch(SectionSearch model, int? page)
         {
             if (!ModelState.IsValid)
@@ -121,8 +115,7 @@ namespace Web.App.Controllers
             }
             return PartialView(studentLst);
         }
-
-        [Audit]
+        
         public async Task<ActionResult> StudentOption()
         {
             IEnumerable<Student> section = await _studentRepo.SelectAll();
@@ -135,7 +128,6 @@ namespace Web.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Audit]
         public async Task<ActionResult> StudentSearch(StudentSearchOption modelView)
         {
             if (ModelState.IsValid)

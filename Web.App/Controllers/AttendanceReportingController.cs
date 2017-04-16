@@ -11,7 +11,6 @@ namespace Web.App.Controllers
     {
         // GET: AttendanceReporting
         [Authorize]
-        [Audit]
         public ActionResult Index(int? sectionId, string dateFrom, string dateTo)
         {
             try

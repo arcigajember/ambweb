@@ -29,7 +29,6 @@ namespace Web.App.Controllers
             _sectionRepo = new SectionRepository();
         }
         // GET: Student
-        [Audit]
         public async Task<PartialViewResult> Index(string searchString, string currentFilter, int? page)
         {
             if (!string.IsNullOrEmpty(searchString))
@@ -61,7 +60,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Student/Details/5
-        [Audit]
         public async Task<ActionResult> Details(int? id)
         {
             MessageAlert messageAlert;
@@ -101,7 +99,6 @@ namespace Web.App.Controllers
 
         // GET: Student/Create
         [HttpGet]
-        [Audit]
         public async Task<ActionResult> Create()
         {
             var id = Convert.ToString(await _studentRepo.GetIdentity());
@@ -184,7 +181,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Student/Edit/5
-        [Audit]
         public async Task<ActionResult> Edit(int? id)
         {
             MessageAlert messageAlert;
@@ -270,7 +266,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Student/Delete/5
-        [Audit]
         public async Task<ActionResult> Delete(int? id)
         {
             MessageAlert messageAlert;
@@ -358,8 +353,7 @@ namespace Web.App.Controllers
 
             return RedirectToAction("Index", "DataManage");
         }
-
-        [Audit]
+        
         public async Task<ActionResult> GuardianSelectAll(string searchString, string currentFilter, int? page)
         {
             if (!string.IsNullOrEmpty(searchString))
@@ -390,7 +384,6 @@ namespace Web.App.Controllers
         }
 
         [HttpPost]
-        [Audit]
         public async Task<ActionResult> GuardianCreate(StudentView model)
         {
             try
@@ -441,7 +434,6 @@ namespace Web.App.Controllers
         }
 
         [HttpGet]
-        [Audit]
         public async Task<ActionResult> SectionSelectAll(string searchString, string currentFilter, int? page)
         {
             if (!string.IsNullOrEmpty(searchString))
@@ -469,7 +461,6 @@ namespace Web.App.Controllers
         }
 
         [HttpPost]
-        [Audit]
         public async Task<ActionResult> StudentSectionCreate(StudentSectionView model)
         {
             await _studentRepo.SectionInsert(model);
@@ -477,7 +468,6 @@ namespace Web.App.Controllers
         }
 
         [HttpPost]
-        [Audit]
         public async Task<ActionResult> StudentGuardianDelete(int? studentId, int? guardianId)
         {
             try

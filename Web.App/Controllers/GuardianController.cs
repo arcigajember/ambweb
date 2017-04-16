@@ -24,7 +24,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Guardian
-        [Audit]
         public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
         {
             if (!string.IsNullOrEmpty(searchString))
@@ -54,7 +53,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Guardian/Details/5
-        [Audit]
         public async Task<ActionResult> Details(int? id)
         {
             MessageAlert messageAlert;
@@ -90,7 +88,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Guardian/Create
-        [Audit]
         public ActionResult Create()
         {
             return PartialView();
@@ -154,7 +151,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Guardian/Edit/5
-        [Audit]
         public async Task<ActionResult> Edit(int? id)
         {
             MessageAlert messageAlert;
@@ -236,7 +232,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Guardian/Delete/5
-        [Audit]
         public async Task<ActionResult> Delete(int? id)
         {
             MessageAlert messageAlert;

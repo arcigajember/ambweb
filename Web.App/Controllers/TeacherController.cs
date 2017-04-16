@@ -29,7 +29,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Teacher
-        [Audit]
         public async Task<ActionResult> Index(string searchString, string currentFilter, int? page)
         {
             if (!string.IsNullOrEmpty(searchString))
@@ -59,7 +58,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Teacher/Details/5
-        [Audit]
         public async Task<ActionResult> Details(int? id)
         {
             MessageAlert messageAlert;
@@ -95,7 +93,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Teacher/Create
-        [Audit]
         public ActionResult Create()
         {
             return PartialView();
@@ -156,7 +153,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Teacher/Edit/5
-        [Audit]
         public async Task<ActionResult> Edit(int? id)
         {
             MessageAlert messageAlert;
@@ -232,7 +228,6 @@ namespace Web.App.Controllers
         }
 
         // GET: Teacher/Delete/5
-        [Audit]
         public async Task<ActionResult> Delete(int? id)
         {
             MessageAlert messageAlert;
@@ -305,8 +300,7 @@ namespace Web.App.Controllers
             }
             return RedirectToAction("Index", "DataManage");
         }
-
-        [Audit]
+        
         public async Task<ActionResult> Schedule(int? id)
         {
             MessageAlert messageAlert;
@@ -349,8 +343,7 @@ namespace Web.App.Controllers
 
             return PartialView(modelView);
         }
-
-        [Audit]
+        
         public async Task<ActionResult> ScheduleAssign(int? id)
         {
             MessageAlert messageAlert;
